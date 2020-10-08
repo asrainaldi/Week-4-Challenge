@@ -10,14 +10,14 @@
     </div>
     <br />
     <div>
-        <input class="button firstRow" style=" top:60px" type="button" data-value="M+" value="MC" onclick="calc(this)">
+        <input class="button firstRow" style=" top:60px" type="button" data-value="MC" value="MC" onclick="symbolBtn(this)">
         <input class="button firstRow" style=" top:95px" type="button" data-value="7" value="7" onclick="calc(this)">
         <input class="button firstRow" style=" top:130px" type="button" data-value="4" value="4" onclick="calc(this)">
         <input class="button firstRow" style=" top:165px" type="button" data-value="1" value="1" onclick="calc(this)">
         <input class="button firstRow" style=" top:200px" type="button" data-value="0" value="0" onclick="calc(this)">
     </div>
     <div>
-        <input class="button secoundRow" style=" top:60px" type="button" data-value="MR" value="MR" onclick="calc(this)">
+        <input class="button secoundRow" style=" top:60px" type="button" data-value="MR" value="MR" onclick="symbolBtn(this)">
         <input class="button secoundRow" style=" top:95px" type="button" data-value="8" value="8" onclick="calc(this)">
         <input class="button secoundRow" style=" top:130px" type="button" data-value="5" value="5" onclick="calc(this)">
         <input class="button secoundRow" style=" top:165px" type="button" data-value="2" value="2" onclick="calc(this)">
@@ -38,7 +38,7 @@
         <input class="button forthRow" style=" top:200px" type="button" data-value="" value="&plus;" onclick="calc(this)">
     </div>
     <div>
-        <input class="button fithRow" style=" top:60px" type="button" data-value="C" value="C" onclick="calc(this)">
+        <input class="button fithRow" style=" top:60px" type="button" data-value="C" value="C" onclick="symbolBtn(this)">
         <input class="button fithRow" style=" top:95px" type="button" data-value="+/-" value="+/-" onclick="calc(this)">
         <input class="button fithRow" style=" top:130px" type="button" data-value="-" value="&rarr;" onclick="calc(this)">
         <input class="equalsBtn fithRow" style=" top:165px" type="button" data-value="=" value="=" onclick="calc(this)">
@@ -85,6 +85,7 @@
     var result = 0;
     var currentNumber = 0;
     var currentCalucation = "";
+    var MR = "";
 
     function calc(btn) {
 
@@ -98,16 +99,23 @@
         else
             document.getElementById("currentDisplays").value = document.getElementById("currentDisplays").value + "" + numberBtn;
 
+    }
 
-
-        return 0;
+    function symbolBtn(btn) {
 
         var symbol = btn.dataset.value;
+        currentDisplay = document.getElementById("currentDisplays").value;
 
-        if (symbol == "+") {
-            result = currentNumber + parseFloat(numbers[1]);
-            //document.getElementById("helpText").innerHTML = "Addtion +";
+        if (symbol == "C")
+            document.getElementById("currentDisplays").value = "0";
+
+        else if (symbol == "M+") {
+            if (MR == "")
+                MR = parseFloat(currentDisplay);
+            else MR = parseFloat(MR) + parseFloat(currentDisplay);
         }
+        else if (symbol == "MC")
+            MR = "";
         else if (symbol == "x") {
             result = parseFloat(numbers[0]) * parseFloat(numbers[1]);
         }
@@ -118,9 +126,10 @@
             result = parseFloat(numbers[0]) / parseFloat(numbers[1]);
         }
 
-        document.getElementById("result").value = result;
+        //document.getElementById("result").value = result;
 
     }
+
 
 
 </script>
