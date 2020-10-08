@@ -95,14 +95,12 @@
     var decimalUsed = false;
 
     function calc(btn) {
-
         if (newCalulation == true) {
             document.getElementById("currentDisplays").value = 0;
             document.getElementById("hiddenInstructions").value = "";
             newCalulation = false;
         }
         var numberBtn = parseInt(btn.dataset.value);
-
         currentNumber = document.getElementById("currentDisplays").value;
         document.getElementById("hiddenInstructions").value = document.getElementById("hiddenInstructions").value + numberBtn;
 
@@ -116,6 +114,11 @@
         }
         else
             document.getElementById("currentDisplays").value += "" + numberBtn;
+
+        newNumberSeries = false;
+
+        console.log(newNumberSeries + " btn");
+
     }
 
     function symbolBtn(btn) {
@@ -215,7 +218,11 @@
                 default:
                     break;
             }
+            console.log(newNumberSeries + " =");
+
             reset()
+            console.log(newNumberSeries + " after res");
+
         }
     }
 
