@@ -1,11 +1,11 @@
 <html>
 <body>
     <span>
-        <input type="text" value="" id="hiddenInstructions">
+        <input style="text-align:right" type="text" value="" id="hiddenInstructions">
     </span>
     <div>
         <span>
-            <input  style="text-align:right; position:absolute; left:15px" type="text" readonly="readonly" value="0" id="currentDisplays">
+            <input style="text-align:right; position:absolute; left:15px" type="text" readonly="readonly" value="0" id="currentDisplays">
         </span>
     </div>
     <br />
@@ -53,72 +53,74 @@
         height: 30px;
         width: 30px;
     }
-    .firstRow{
+
+    .firstRow {
         left: 15px;
     }
 
-    .secoundRow{
+    .secoundRow {
         left: 50px;
     }
-    .thirdRow{
+
+    .thirdRow {
         left: 85px;
     }
-    .forthRow{
-        left:120px;
+
+    .forthRow {
+        left: 120px;
     }
+
     .fithRow {
         left: 155px;
     }
+
     .equalsBtn {
         position: absolute;
         height: 65px;
         width: 30px;
     }
-    
-   
 </style>
 
 <script>
     var result = 0;
+    var currentNumber = 0;
+    var currentCalucation = "";
 
     function calc(btn) {
-        var numbers = getNumbers();
-        var result;
+
+        var numberBtn = parseInt(btn.dataset.value);
+
+        currentNumber = numberBtn;
+        document.getElementById("hiddenInstructions").value = document.getElementById("hiddenInstructions").value + numberBtn;
+
+        if (document.getElementById("currentDisplays").value == "0")
+            document.getElementById("currentDisplays").value = numberBtn;
+        else
+            document.getElementById("currentDisplays").value = document.getElementById("currentDisplays").value + "" + numberBtn;
+
+
+
+        return 0;
+
         var symbol = btn.dataset.value;
 
         if (symbol == "+") {
-            result = parseFloat(numbers[0]) + parseFloat(numbers[1]);
-            document.getElementById("helpText").innerHTML = "Addtion +";
+            result = currentNumber + parseFloat(numbers[1]);
+            //document.getElementById("helpText").innerHTML = "Addtion +";
         }
         else if (symbol == "x") {
             result = parseFloat(numbers[0]) * parseFloat(numbers[1]);
-            document.getElementById("helpText").innerHTML = "Multiply +";
         }
         else if (symbol == "-") {
             result = parseFloat(numbers[0]) - parseFloat(numbers[1]);
-            document.getElementById("helpText").innerHTML = "Subtract +";
         }
         else if (symbol == "/") {
             result = parseFloat(numbers[0]) / parseFloat(numbers[1]);
-            document.getElementById("helpText").innerHTML = "Divide &divide";
         }
 
         document.getElementById("result").value = result;
 
     }
 
-    function getNumbers() {
-        var text1 = document.getElementById("number1");
-        var text2 = document.getElementById("number2");
-        if (text1.value == "") {
-            alert("Missing first number");
-            text1.focus();
-        }
-        if (text2.value == "") {
-            alert("Missing secound number");
-            text2.focus();
-        }
-        return [text1.value, text2.value];
-    }
 
 </script>
