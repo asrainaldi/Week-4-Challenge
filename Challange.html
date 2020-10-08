@@ -21,7 +21,7 @@
         <input class="button secoundRow" style=" top:95px" type="button" data-value="8" value="8" onclick="calc(this)">
         <input class="button secoundRow" style=" top:130px" type="button" data-value="5" value="5" onclick="calc(this)">
         <input class="button secoundRow" style=" top:165px" type="button" data-value="2" value="2" onclick="calc(this)">
-        <input class="button secoundRow" style=" top:200px" type="button" data-value="00" value="00" onclick="calc(this)">
+        <input class="button secoundRow" style=" top:200px" type="button" data-value="00" value="00" onclick="symbolBtn(this)">
     </div>
     <div>
         <input class="button thirdRow" style=" top:60px" type="button" data-value="M-" value="M-" onclick="symbolBtn(this)">
@@ -192,6 +192,10 @@
             document.getElementById("currentDisplays").value = currentDisplay + ".";
             decimalUsed = true;
         }
+        else if (symbol == "00") {
+            if (parseFloat(currentDisplay) < 0 || currentDisplay.substr(0,2) == "0.")
+                document.getElementById("currentDisplays").value += "00";
+        }
         else if (symbol == "=" && symbolPending == true) {
 
             switch (currentSymbol) {
@@ -218,11 +222,8 @@
                 default:
                     break;
             }
-            console.log(newNumberSeries + " =");
 
             reset()
-            console.log(newNumberSeries + " after res");
-
         }
     }
 
