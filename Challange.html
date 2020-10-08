@@ -92,6 +92,7 @@
     var previousNum;
     var newNumberSeries = false;
     var newCalulation = false;
+    var decimalUsed = false;
 
     function calc(btn) {
 
@@ -100,8 +101,6 @@
             document.getElementById("hiddenInstructions").value = "";
             newCalulation = false;
         }
-
-
         var numberBtn = parseInt(btn.dataset.value);
 
         currentNumber = document.getElementById("currentDisplays").value;
@@ -117,9 +116,7 @@
         }
         else
             document.getElementById("currentDisplays").value += "" + numberBtn;
-
     }
-
 
     function symbolBtn(btn) {
 
@@ -153,8 +150,11 @@
         else if (symbol == "MC")
             MR = "";
         else if (symbol == ">") {
-            console.log(currentDisplay + " " + currentDisplay.substr(0, currentDisplay.length-1))
-                document.getElementById("currentDisplays").value = currentDisplay.substr(0, currentDisplay.length - 1);
+            console.log(currentDisplay + " " + currentDisplay.substr(0, currentDisplay.length - 1))
+            document.getElementById("currentDisplays").value = currentDisplay.substr(0, currentDisplay.length - 1);
+        }
+        else if (symbol == "+/-") {
+            document.getElementById("currentDisplays").value = parseFloat(currentDisplay) * -1
         }
 
         else if (symbol == "+") {
@@ -183,7 +183,12 @@
                 previousNum = parseFloat(currentDisplay);
             else if (hiddenDisplay.substr((hiddenDisplay.length - 2), 1) != "/")
                 previousNum /= parseFloat(currentDisplay);
-            setSymbolActions(symbol);        }
+            setSymbolActions(symbol);
+        }
+        else if (symbol == "." && decimalUsed != true) {
+            document.getElementById("currentDisplays").value = currentDisplay + ".";
+            decimalUsed = true;
+        }
         else if (symbol == "=" && symbolPending == true) {
 
             switch (currentSymbol) {
@@ -218,9 +223,11 @@
         currentSymbol = symbol;
         symbolPending = true;
         newNumberSeries = true;
+        decimalUsed = false;
     }
 
     function reset() {
+        decimalUsed = false;
         result = 0;
         currentNumber = 0;
         currentCalucation = "";
